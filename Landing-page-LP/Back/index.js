@@ -40,6 +40,11 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB conectado"))
     .catch(err => console.error("Error Mongo:", err));
 
+// Ruta raíz para verificar que el servidor está activo
+app.get("/", (req, res) => {
+    res.send("Servidor de Le Parfum activo y funcionando correctamente.");
+});
+
 // Ruta para obtener perfumes (con filtro opcional por marca)
 app.get("/perfumes", async (req, res) => {
     try {
