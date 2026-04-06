@@ -5,7 +5,10 @@ export function usePerfumes(marcaSource) {
     const loading = ref(true);
     // Usamos window.location.hostname para detectar la IP de tu red automáticamente
     const rawUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
-    const backendUrl = rawUrl.replace(/\/$/, ""); // Elimina barra final si existe
+    let backendUrl = rawUrl.replace(/\/$/, ""); // Elimina barra final si existe
+    if (backendUrl && !backendUrl.startsWith('http')) {
+        backendUrl = `https://${backendUrl}`;
+    }
     const cart = ref([]);
     const selectedPerfume = ref(null);
     const showModal = ref(false);

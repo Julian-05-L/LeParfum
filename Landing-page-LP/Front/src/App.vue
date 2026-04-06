@@ -12,7 +12,10 @@ const router = useRouter()
 
 // Detectar URL del backend dinámicamente
 const rawUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
-const backendUrl = rawUrl.replace(/\/$/, "");
+let backendUrl = rawUrl.replace(/\/$/, "");
+if (backendUrl && !backendUrl.startsWith('http')) {
+  backendUrl = `https://${backendUrl}`;
+}
 
 onMounted(() => {
   // Verificar si ya hay una sesión de admin activa guardada
