@@ -23,6 +23,11 @@ export function usePerfumes(marcaSource) {
             loading.value = true;
             const marca = isRef(marcaSource) ? marcaSource.value : marcaSource;
             const response = await fetch(`${backendUrl}/perfumes?marca=${encodeURIComponent(marca)}`);
+            
+            if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+            const contentType = response.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) throw new Error("La respuesta del servidor no es válida");
+
             const data = await response.json();
             // Filtro de seguridad: Solo aceptamos perfumes cuya marca sea IDÉNTICA a la solicitada.
             // Esto evita que se cuelen perfumes de otras categorías si el backend falla.

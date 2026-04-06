@@ -42,7 +42,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Ruta raíz para verificar que el servidor está activo
 app.get("/", (req, res) => {
-    res.send("Servidor de Le Parfum activo y funcionando correctamente.");
+    res.json({ status: "ok", message: "Servidor de Le Parfum activo" });
 });
 
 // Ruta para obtener perfumes (con filtro opcional por marca)

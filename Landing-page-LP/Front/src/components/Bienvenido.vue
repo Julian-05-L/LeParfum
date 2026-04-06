@@ -108,6 +108,11 @@ const fetchCategoryImages = async () => {
       if (category.marca) {
         try {
           const response = await fetch(`${backendUrl}/perfumes?marca=${encodeURIComponent(category.marca)}`);
+          
+          if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+          const contentType = response.headers.get("content-type");
+          if (!contentType || !contentType.includes("application/json")) throw new Error("La respuesta no es JSON");
+
           const data = await response.json();
           
           // FILTRO DE SEGURIDAD: Nos aseguramos de que los perfumes sean EXACTAMENTE de esa marca
