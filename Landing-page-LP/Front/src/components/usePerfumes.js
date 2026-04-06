@@ -4,7 +4,8 @@ export function usePerfumes(marcaSource) {
     const perfumes = ref([]);
     const loading = ref(true);
     // Usamos window.location.hostname para detectar la IP de tu red automáticamente
-    const backendUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+    const rawUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+    const backendUrl = rawUrl.replace(/\/$/, ""); // Elimina barra final si existe
     const cart = ref([]);
     const selectedPerfume = ref(null);
     const showModal = ref(false);
@@ -42,15 +43,11 @@ export function usePerfumes(marcaSource) {
         if (!imagenPath) return '';
         let path = imagenPath.trim();
 
-        // Si la ruta empieza con "img/" pero le falta la barra inicial, se la agregamos
-        if (path.startsWith('img/')) {
-            path = '/' + path;
-        }
-
-        if (path.startsWith('http') || path.startsWith('/img')) {
+        if (path.startsWith('http')) {
             return path;
         }
-        return `${backendUrl}/${path}`;
+        // Forzamos que siempre apunte al backend, incluso si empieza con /
+        return `${backendUrl}/${path.replace(/^\//, "")}`;
     };
 
     const openModal = (perfume) => {

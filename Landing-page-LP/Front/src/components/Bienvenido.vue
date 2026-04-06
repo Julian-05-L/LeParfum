@@ -4,22 +4,18 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 // Usamos window.location.hostname para detectar la IP de tu red automáticamente
-const backendUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+const rawUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+const backendUrl = rawUrl.replace(/\/$/, "");
 
 // Función para construir la URL de la imagen (igual que en AntonioBanderas.vue)
 const getImageUrl = (imagePath) => {
   if (!imagePath) return '';
   let path = imagePath.trim();
-
-  // Corrección automática: si falta la barra inicial en rutas locales
-  if (path.startsWith('img/')) {
-    path = '/' + path;
-  }
-
-  if (path.startsWith('http') || path.startsWith('/img')) {
+  
+  if (path.startsWith('http')) {
     return path;
   }
-  return `${backendUrl}/${path}`;
+  return `${backendUrl}/${path.replace(/^\//, "")}`;
 }
 
 const loading = ref(true);
