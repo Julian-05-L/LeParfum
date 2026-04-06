@@ -11,7 +11,8 @@ const isAdmin = ref(false)
 const router = useRouter()
 
 // Detectar URL del backend dinámicamente
-const backendUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+const rawUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+const backendUrl = rawUrl.replace(/\/$/, "");
 
 onMounted(() => {
   // Verificar si ya hay una sesión de admin activa guardada

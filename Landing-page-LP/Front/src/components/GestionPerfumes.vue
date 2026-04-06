@@ -17,7 +17,8 @@ const router = useRouter()
 
 const handleLogout = inject('handleLogout')
 
-const backendUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+const rawUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+const backendUrl = rawUrl.replace(/\/$/, "");
 
 const marcasDisponibles = [
     'Antonio Banderas',
