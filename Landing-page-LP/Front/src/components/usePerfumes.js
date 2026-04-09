@@ -4,7 +4,7 @@ export function usePerfumes(marcaSource) {
     const perfumes = ref([]);
     const loading = ref(true);
     // Usamos window.location.hostname para detectar la IP de tu red automáticamente
-    const rawUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+    const rawUrl = import.meta.env.VITE_API_URL || `https://le-parfum-smoky.vercel.app/api`;
     let backendUrl = rawUrl.replace(/\/$/, ""); // Elimina barra final si existe
     if (backendUrl && !backendUrl.startsWith('http')) {
         backendUrl = `https://${backendUrl}`;
