@@ -5,8 +5,8 @@ import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import multer from "multer";
 
-import Perfume from "../models/Perfume.js";
-import User from "../models/User.js";
+import Perfume from "../Back/models/Perfume.js";
+import User from "../Back/models/User.js";
 
 dotenv.config();
 
