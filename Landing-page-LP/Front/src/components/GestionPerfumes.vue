@@ -17,9 +17,9 @@ const router = useRouter()
 
 const handleLogout = inject('handleLogout')
 
-const rawUrl = import.meta.env.VITE_API_URL || `https://le-parfum-smoky.vercel.app/api`;
+const rawUrl = import.meta.env.VITE_API_URL || '/api';
 let backendUrl = rawUrl.replace(/\/$/, "");
-if (backendUrl && !backendUrl.startsWith('http')) {
+if (backendUrl && !backendUrl.startsWith('http') && !backendUrl.startsWith('/')) {
     backendUrl = `https://${backendUrl}`;
 }
 

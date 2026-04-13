@@ -11,9 +11,9 @@ const isAdmin = ref(false)
 const router = useRouter()
 
 // Detectar URL del backend dinámicamente
-const rawUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+const rawUrl = import.meta.env.VITE_API_URL || '/api';
 let backendUrl = rawUrl.replace(/\/$/, "");
-if (backendUrl && !backendUrl.startsWith('http')) {
+if (backendUrl && !backendUrl.startsWith('http') && !backendUrl.startsWith('/')) {
   backendUrl = `https://${backendUrl}`;
 }
 

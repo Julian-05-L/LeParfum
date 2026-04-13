@@ -4,9 +4,9 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 // Usamos window.location.hostname para detectar la IP de tu red automáticamente
-const rawUrl = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+const rawUrl = import.meta.env.VITE_API_URL || '/api';
 let backendUrl = rawUrl.replace(/\/$/, "");
-if (backendUrl && !backendUrl.startsWith('http')) {
+if (backendUrl && !backendUrl.startsWith('http') && !backendUrl.startsWith('/')) {
   backendUrl = `https://${backendUrl}`;
 }
 
