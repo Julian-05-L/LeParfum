@@ -25,7 +25,7 @@ export function usePerfumes(marcaSource) {
         try {
             loading.value = true;
             const marca = isRef(marcaSource) ? marcaSource.value : marcaSource;
-            const response = await fetch(`${backendUrl}/perfumes?marca=${encodeURIComponent(marca)}`);
+            const response = await fetch(`api/perfumes?marca=${encodeURIComponent(marca)}`);
             
             if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
             const contentType = response.headers.get("content-type");
